@@ -53,16 +53,18 @@ def detect():
         response = connection.getresponse()
         body = str(response.read())        
 
+        t = time.asctime(time.localtime(time.time()))
+
         if last_body != "" and body != last_body:
-            print('Updated at ' + str(time.time()))
+            print('Updated at ' + t)
 
         if body.find(CONFIG['keyword']) >= 0:
             # Found the keyword
-            print('Detected at ' + str(time.time()))
+            print('Detected at ' + t)
             # send_mail(body)
         else:
             # Not found
-            print('Not Found at ' + str(time.time())) 
+            print('Not Found at ' + t) 
         last_body = body
     except Exception as err:
         print(str(err))
